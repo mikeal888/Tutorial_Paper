@@ -1,5 +1,6 @@
 *.png
 *.pdf
+.DS_store
 
 # Directories to exclude
 ./ipynb_checkpoints
