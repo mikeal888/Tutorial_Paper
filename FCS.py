@@ -113,7 +113,7 @@ def TwoTimeCorrelationSS(H, t, c_ops, ρ, m_ops, μ, method='PD'):
     Jα = np.array([np.real((Ivec.trans() * ℒ1i * ρvec)[0,0]) for ℒ1i in ℒ1])
     
     # Compute two-time correlation function 
-    Ft = np.array([np.real((Ivec.trans() * Lα* (ℒ*ti).expm() * Lα * ρvec)[0,0]) for ti in t]) - np.sum(μ * Jα)**2 
+    Ft = np.array([np.real((Ivec.trans() * Lα * (ℒ*ti).expm() * Lα * ρvec)[0,0]) for ti in t]) - np.sum(μ * Jα)**2
 
     return Ft
 

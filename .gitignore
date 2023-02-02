@@ -1,4 +1,7 @@
 *.png
 *.pdf
+
+# Directories to exclude
 ./ipynb_checkpoints
 ./Figures
+./__pychace__
