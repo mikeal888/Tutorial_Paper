@@ -1,11 +1,11 @@
 *.png
 *.pdf
 .DS_store
+.idea
 
 # Directories to exclude
 ./ipynb_checkpoints
 ./Figures
-./idea
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
