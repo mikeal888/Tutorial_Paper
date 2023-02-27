@@ -187,6 +187,21 @@ def FCSPowerSpectrumLinear(H, c_ops, rho, omega, m_ops, mu, method='PD'):
  
     return S
 
+def Partition(x, k, offset):
+    "split array into subarrays of fixed length k"
+    ix = int(np.floor((len(x)-k)/offset + 1))
+    xs = np.zeros((ix, k))
+
+    ki = 0
+    i = 0
+    while i < ix:
+        xs[i,:] = x[ki:ki+k]
+
+        ki += int(offset)
+        i+=1
+
+    return xs
+
 def PowerSpectrum(x, dt, averaging=1, overlap=0.3):
     d = len(x)
     
@@ -201,21 +216,7 @@ def PowerSpectrum(x, dt, averaging=1, overlap=0.3):
     omegas = np.arange(1, k/2 +1)*(2*np.pi)/(k*dt)
     omegas = np.concatenate((-np.flip(omegas)[1:], omegas), axis=0)
 
-    # Define partition function like Mathematics
-    def Partition(x, k, offset):
-        ix = int(np.floor((len(x)-k)/offset + 1))
-        xs = np.zeros((ix, k))
-
-        ki = 0
-        i = 0
-        while i < ix:
-            xs[i,:] = x[ki:ki+k]
-
-            ki += int(offset)
-            i+=1
-
-        return xs
-
+    # Partition input signal into k steps 
     xs = Partition(x, k, int(np.floor(overlap*k)))
     xf = np.array([np.fft.fft(xi[:k] - np.mean(xi))/np.sqrt(k) for xi in xs])
     S = np.mean(np.array([dt*np.abs(xfi)**2 for xfi in xf]),axis=0)
@@ -233,22 +234,6 @@ def TwoTimeCorrelation(x, dt, averaging=1, overlap=0.3):
 
     if k%2 != 0:
         k = k-1
-
-
-    # Define partition function like Mathematics
-    def Partition(x, k, offset):
-        ix = int(np.floor((len(x)-k)/offset + 1))
-        xs = np.zeros((ix, k))
-
-        ki = 0
-        i = 0
-        while i < ix:
-            xs[i,:] = x[ki:ki+k]
-
-            ki += int(offset)
-            i+=1
-
-        return xs
 
     xs = Partition(x, k, int(np.floor(overlap*k)))
     xf = np.array([xi[:k] - np.mean(xi) for xi in xs])
