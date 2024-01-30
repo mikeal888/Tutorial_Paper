@@ -2,6 +2,7 @@
 *.pdf
 .DS_store
 .idea
+.vscode
 
 # Directories to exclude
 ./ipynb_checkpoints
