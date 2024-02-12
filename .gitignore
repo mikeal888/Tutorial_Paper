@@ -3,10 +3,12 @@
 .DS_store
 .idea
 .vscode
+.pptx
 
 # Directories to exclude
 ./ipynb_checkpoints
-./Figures
+Figures/
+.gitignore
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
